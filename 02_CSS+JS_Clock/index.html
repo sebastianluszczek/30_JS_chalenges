@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            position: relative;
+            height: 100vh;
+        }
+
+        .clock {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border: 5px solid black;
+            border-radius: 50%;
+        }
+
+        .clock div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: top center;
+            transform: translate(-50%, 0) rotate(0deg);
+        }
+
+        .h-hint {
+            width: 8px;
+            height: 50px;
+            background-color: black;
+
+        }
+
+        .m-hint {
+            width: 4px;
+            background-color: gray;
+            height: 75px;
+
+        }
+
+        .s-hint {
+            width: 2px;
+            height: 90px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock">
+        <div class="h-hint"></div>
+        <div class="m-hint"></div>
+        <div class="s-hint"></div>
+    </div>
+    <script>
+        const sec = document.querySelector('.s-hint');
+        const min = document.querySelector('.m-hint');
+        const hr = document.querySelector('.h-hint');
+
+        setInterval(function () {
+            let currSec = new Date().getSeconds();
+            let currMin = new Date().getMinutes();
+            let currHr = new Date().getHours();
+
+            console.log(currHr, currMin, currSec);
+            sec.style.transform = `translate(-50%, 0) rotate(${180 + currSec * 6}deg)`;
+            min.style.transform = `translate(-50%, 0) rotate(${180 + currMin * 6}deg)`;
+            hr.style.transform = `translate(-50%, 0) rotate(${180 + currHr * 30 + currMin * 0.1}deg)`;
+        }, 1000)
+    </script>
+</body>
+
+</html>
