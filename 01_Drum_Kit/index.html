@@ -38,7 +38,13 @@
             color: orange;
             margin: 10px;
             border-radius: 3px;
-            background-color: rgba(0, 0, 0, 0.7)
+            background-color: rgba(0, 0, 0, 0.7);
+            transition: .1s;
+        }
+
+        .key.active {
+            border: 3px solid orange;
+
         }
 
         h3 {
@@ -86,6 +92,33 @@
             <h3>TOM</h3>
         </div>
     </div>
+    <audio data-key="65" src="audio/boom.wav"></audio>
+    <audio data-key="83" src="audio/clap.wav"></audio>
+    <audio data-key="68" src="audio/hihat.wav"></audio>
+    <audio data-key="70" src="audio/kick.wav"></audio>
+    <audio data-key="71" src="audio/openhat.wav"></audio>
+    <audio data-key="72" src="audio/ride.wav"></audio>
+    <audio data-key="74" src="audio/snare.wav"></audio>
+    <audio data-key="75" src="audio/tink.wav"></audio>
+    <audio data-key="76" src="audio/tom.wav"></audio>
+    <script>
+        window.addEventListener('keydown', function (e) {
+            const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+            const sound = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            if (!sound) return;
+
+            key.classList.add('active');
+            sound.currentTime = 0;
+            sound.play();
+        })
+
+        const keys = document.querySelectorAll('.key');
+        for (const i of keys) {
+            i.addEventListener('transitionend', function () {
+                i.classList.remove('active');
+            })
+        }
+    </script>
 </body>
 
 </html>
